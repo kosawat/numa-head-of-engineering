@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import * as dotenv from "dotenv";
 
-dotenv.config();
+import logger from "./utils/logger";
+import { connectToDatabase } from "./utils/db";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 
-const server = app.listen(PORT, () => {
-  console.log(`Server listening at port ${PORT}`);
+const server = app.listen(PORT, async () => {
+  await connectToDatabase();
+  logger.info(`Server listening at port ${PORT}`);
 });
