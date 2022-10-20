@@ -2,6 +2,7 @@ import { Express, Request, Response } from "express";
 
 import {
   createReservationHandler,
+  deleteReservationHandler,
   getAllReservationsHandler,
   getReservationHandler,
   updateReservationHandler,
@@ -19,11 +20,14 @@ function routes(app: Express) {
   // Get all reservations
   app.get("/api/reservations", getAllReservationsHandler);
 
-  // Get a reservation by ID
+  // Get a reservation by id
   app.get("/api/reservations/:id", getReservationHandler);
 
-  // Update a reservation by ID
+  // Update a reservation by id
   app.patch("/api/reservations/:id", updateReservationHandler);
+
+  // Delete a reservation by id
+  app.delete("/api/reservations/:id", deleteReservationHandler);
 }
 
 export default routes;

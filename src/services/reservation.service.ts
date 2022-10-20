@@ -1,4 +1,9 @@
-import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
+import {
+  DocumentDefinition,
+  FilterQuery,
+  QueryOptions,
+  UpdateQuery,
+} from "mongoose";
 
 import ReservationModel, {
   ReservationDocument,
@@ -33,9 +38,15 @@ export async function findReservation(
 }
 
 export async function findAndUpdateReservation(
-    query: FilterQuery<ReservationDocument>,
-    update: UpdateQuery<ReservationDocument>,
-    options: QueryOptions
-  ) {
-    return ReservationModel.findOneAndUpdate(query, update, options);
-  }
+  query: FilterQuery<ReservationDocument>,
+  update: UpdateQuery<ReservationDocument>,
+  options: QueryOptions
+) {
+  return ReservationModel.findOneAndUpdate(query, update, options);
+}
+
+export async function deleteReservation(
+  query: FilterQuery<ReservationDocument>
+) {
+  return ReservationModel.deleteOne(query);
+}

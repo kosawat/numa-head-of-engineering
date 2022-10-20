@@ -57,18 +57,23 @@ const params = {
   }),
 };
 
-export const createProductSchema = object({
+export const createReservationSchema = object({
   ...payload,
 });
 
-export const updateProductSchema = object({
+export const updateReservationSchema = object({
   ...params,
 });
 
-export const getProductSchema = object({
+export const getReservationSchema = object({
   ...params,
 });
 
-export type CreateReservationInput = TypeOf<typeof createProductSchema>;
-export type UpdateReservationInput = TypeOf<typeof updateProductSchema>;
-export type ReadReservationInput = TypeOf<typeof getProductSchema>;
+export const deleteReservationSchema = object({
+  ...params,
+});
+
+export type CreateReservationInput = TypeOf<typeof createReservationSchema>;
+export type UpdateReservationInput = TypeOf<typeof updateReservationSchema>;
+export type ReadReservationInput = TypeOf<typeof getReservationSchema>;
+export type DeleteReservationInput = TypeOf<typeof deleteReservationSchema>;

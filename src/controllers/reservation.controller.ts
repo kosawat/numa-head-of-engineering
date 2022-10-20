@@ -2,12 +2,14 @@ import { Request, Response } from "express";
 
 import {
   CreateReservationInput,
+  DeleteReservationInput,
   ReadReservationInput,
   UpdateReservationInput,
 } from "../schema/reservation.schema";
 
 import {
   createReservation,
+  deleteReservation,
   findAllReservations,
   findAndUpdateReservation,
   findReservation,
@@ -22,9 +24,9 @@ export async function createReservationHandler(
   const body = req.body;
 
   try {
-    const product = await createReservation(body);
+    const reservation = await createReservation(body);
 
-    return res.status(201).send(product);
+    return res.status(201).send(reservation);
   } catch (error) {
     logger.error(error);
     res.status(500).json({ message: "Server Error", errors: error });
@@ -51,7 +53,7 @@ export async function getReservationHandler(
   try {
     const reservation = await findReservation({ id });
 
-    if (!reservation) res.sendStatus(404);
+    if (!reservation) return res.sendStatus(404);
 
     return res.send(reservation);
   } catch (error) {
@@ -78,6 +80,26 @@ export async function updateReservationHandler(
     });
 
     return res.send(updatedReservation);
+  } catch (error) {
+    logger.error(error);
+    res.status(500).json({ message: "Server Error", errors: error });
+  }
+}
+
+export async function deleteReservationHandler(
+  req: Request<DeleteReservationInput["params"]>,
+  res: Response
+) {
+  const id = req.params.id;
+
+  try {
+    const reservation = await findReservation({ id });
+
+    if (!reservation) return res.sendStatus(404);
+
+    await deleteReservation({ id });
+
+    return res.sendStatus(200);
   } catch (error) {
     logger.error(error);
     res.status(500).json({ message: "Server Error", errors: error });
