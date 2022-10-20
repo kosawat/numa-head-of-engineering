@@ -1,6 +1,9 @@
 import { Express, Request, Response } from "express";
 
-import { createReservationHandler } from "./controllers/reservation.controller";
+import {
+  createReservationHandler,
+  getReservationsHandler,
+} from "./controllers/reservation.controller";
 
 function routes(app: Express) {
   // API Server Home
@@ -12,10 +15,7 @@ function routes(app: Express) {
   app.post("/api/reservations", createReservationHandler);
 
   // Get all reservations
-  app.get("/api/reservations", (req: Request, res: Response) => {
-    console.log(`GET all reservations`);
-    res.send("GET /api/reservations is called");
-  });
+  app.get("/api/reservations", getReservationsHandler);
 
   // Get a reservation by ID
   app.get("/api/reservations/:reservationId", (req: Request, res: Response) => {

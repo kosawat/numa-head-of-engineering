@@ -7,3 +7,7 @@ export async function createReservation(
 ) {
   return ReservationModel.create(input);
 }
+
+export async function findReservations() {
+    return ReservationModel.find().lean();
+  }
