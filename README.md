@@ -5,7 +5,7 @@ First of all, here is the submission of Product case.
 
 ## Numa's Head of Engineering hands-on coding challenge
 ### Notes & Assumptions
-- Backend API server (Node, Express, TypeScipt) is implemented in this challenge.
+- Backend API server (Node, Express, TypeScript) is implemented in this challenge.
 - Database for this challenge is MongoDB.
 - MongoDB connection string is stored in .env file.
 - There is no authentication check in this challenge.
