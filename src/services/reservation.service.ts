@@ -1,4 +1,4 @@
-import { DocumentDefinition, FilterQuery, QueryOptions } from "mongoose";
+import { DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery } from "mongoose";
 
 import ReservationModel, {
   ReservationDocument,
@@ -6,7 +6,16 @@ import ReservationModel, {
 
 export async function createReservation(
   input: DocumentDefinition<
-    Omit<ReservationDocument, "createdAt" | "updatedAt">
+    Omit<
+      ReservationDocument,
+      | "booking"
+      | "travelPurpose"
+      | "requestEInvoice"
+      | "billingAddress"
+      | "recipients"
+      | "createdAt"
+      | "updatedAt"
+    >
   >
 ) {
   return ReservationModel.create(input);
@@ -22,3 +31,11 @@ export async function findReservation(
 ) {
   return ReservationModel.findOne(query, {}, options);
 }
+
+export async function findAndUpdateReservation(
+    query: FilterQuery<ReservationDocument>,
+    update: UpdateQuery<ReservationDocument>,
+    options: QueryOptions
+  ) {
+    return ReservationModel.findOneAndUpdate(query, update, options);
+  }

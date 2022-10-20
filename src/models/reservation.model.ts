@@ -116,6 +116,7 @@ const reservationSchema = new mongoose.Schema(
 
 export interface ReservationDocument extends mongoose.Document {
   id: string;
+  booking:Booking;
   propertyId: string;
   pmsId: string;
   arrival: Date;
@@ -124,6 +125,10 @@ export interface ReservationDocument extends mongoose.Document {
   primaryGuest: Person;
   additionalGuests: [Person];
   booker: Person;
+  travelPurpose: string;
+  requestEInvoice: boolean;
+  billingAddress: BillingAddress;
+  recipients: [string];
   createdAt: Date;
   updatedAt: Date;
 }

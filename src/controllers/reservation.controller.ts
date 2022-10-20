@@ -9,6 +9,7 @@ import {
 import {
   createReservation,
   findAllReservations,
+  findAndUpdateReservation,
   findReservation,
 } from "../services/reservation.service";
 
@@ -53,6 +54,30 @@ export async function getReservationHandler(
     if (!reservation) res.sendStatus(404);
 
     return res.send(reservation);
+  } catch (error) {
+    logger.error(error);
+    res.status(500).json({ message: "Server Error", errors: error });
+  }
+}
+
+export async function updateReservationHandler(
+  req: Request<UpdateReservationInput["params"]>,
+  res: Response
+) {
+  const id = req.params.id;
+
+  const update = req.body;
+
+  try {
+    const reservation = await findReservation({ id });
+
+    if (!reservation) return res.sendStatus(404);
+
+    const updatedReservation = await findAndUpdateReservation({ id }, update, {
+      new: true,
+    });
+
+    return res.send(updatedReservation);
   } catch (error) {
     logger.error(error);
     res.status(500).json({ message: "Server Error", errors: error });

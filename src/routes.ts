@@ -4,6 +4,7 @@ import {
   createReservationHandler,
   getAllReservationsHandler,
   getReservationHandler,
+  updateReservationHandler,
 } from "./controllers/reservation.controller";
 
 function routes(app: Express) {
@@ -22,13 +23,7 @@ function routes(app: Express) {
   app.get("/api/reservations/:id", getReservationHandler);
 
   // Update a reservation by ID
-  app.patch(
-    "/api/reservations/:reservationId",
-    (req: Request, res: Response) => {
-      console.log(`Update reservation ID: ${req.params.reservationId}`);
-      res.send("PATCH /api/reservations/:reservationId is called");
-    }
-  );
+  app.patch("/api/reservations/:id", updateReservationHandler);
 }
 
 export default routes;
