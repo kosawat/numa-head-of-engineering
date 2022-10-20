@@ -6,7 +6,7 @@ import logger from "./logger";
 dotenv.config();
 
 const DB_CONNECTION_STRING =
-  process.env.DB_CONNECTION_STRING || "YOUR DB CONNECT STRING";
+  process.env.DB_CONNECTION_STRING || "YOUR_MONGODB_CONNECT_STRING";
 
 export async function connectToDatabase() {
   try {
