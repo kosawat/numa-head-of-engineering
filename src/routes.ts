@@ -2,7 +2,8 @@ import { Express, Request, Response } from "express";
 
 import {
   createReservationHandler,
-  getReservationsHandler,
+  getAllReservationsHandler,
+  getReservationHandler,
 } from "./controllers/reservation.controller";
 
 function routes(app: Express) {
@@ -15,13 +16,10 @@ function routes(app: Express) {
   app.post("/api/reservations", createReservationHandler);
 
   // Get all reservations
-  app.get("/api/reservations", getReservationsHandler);
+  app.get("/api/reservations", getAllReservationsHandler);
 
   // Get a reservation by ID
-  app.get("/api/reservations/:reservationId", (req: Request, res: Response) => {
-    console.log(`GET reservation ID: ${req.params.reservationId}`);
-    res.send("GET /api/reservations/:reservationId is called");
-  });
+  app.get("/api/reservations/:id", getReservationHandler);
 
   // Update a reservation by ID
   app.patch(
