@@ -4,6 +4,8 @@
   "description": "Numa's Head of Engineering hands-on coding challenge",
   "main": "src/server.ts",
   "scripts": {
+    "start": "node build/server.js",
+    "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "repository": {
