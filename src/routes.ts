@@ -1,5 +1,7 @@
 import { Express, Request, Response } from "express";
 
+import { createReservationHandler } from "./controllers/reservation.controller";
+
 function routes(app: Express) {
   // API Server Home
   app.get("/", (req: Request, res: Response) =>
@@ -7,10 +9,7 @@ function routes(app: Express) {
   );
 
   // Create a new reservation
-  app.post("/api/reservations", (req: Request, res: Response) => {
-    console.log(`POST a reservation: ${JSON.stringify(req.body)}`);
-    res.send("POST /api/reservations is called");
-  });
+  app.post("/api/reservations", createReservationHandler);
 
   // Get all reservations
   app.get("/api/reservations", (req: Request, res: Response) => {

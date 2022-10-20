@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+import { BillingAddress, Booking, Person } from "../utils/types";
+
 const bookingSchema = new mongoose.Schema({
   id: {
     type: String,
@@ -111,6 +113,20 @@ const reservationSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+export interface ReservationDocument extends mongoose.Document {
+  id: string;
+  propertyId: string;
+  pmsId: string;
+  arrival: Date;
+  departure: Date;
+  adults: number;
+  primaryGuest: Person;
+  additionalGuests: [Person];
+  booker: Person;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const ReservationModel = mongoose.model("Reservation", reservationSchema);
 
